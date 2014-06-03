@@ -1,0 +1,120 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>RTCE paper</title>
+  <style type="text/css">
+  	#papertitle{
+    	position:absolute;
+    	top:10px;
+    	left:300px;    	
+    	width:800px;
+    	height:400px;
+  	}
+  	
+    #author{
+    	position:absolute;
+    	top:50px;
+    	left:300px;
+    	width:500px;
+    	height:50px;
+    }
+    
+    .content{
+    	position:absolute;
+    	width:800px;
+    	height:700px;
+    	border-style:solid;
+    	border-width:0px;
+    	border-color:black;
+    	text-align:justify;
+    	font-size:8pt;
+    	
+    	white-space: pre-wrap;
+    	word-wrap: break-word;
+    	overflow: auto;
+    }
+    
+    #content1{
+    	position:absolute;
+    	top:100px;
+    	margin: 0 auto;  
+    }
+    
+    #content2{
+    	position:absolute;
+    	top:710px;
+    }
+    
+    #content3{
+    	position:absolute;
+    	top:1420px;
+    }
+    
+    #content4{
+    	position:absolute;
+    	top:2130px;
+    }
+  </style>
+</head>
+<body>
+
+<center>
+<!-- 
+<div id="papertitle">Title</div>
+
+<div id="author">Author</div>
+ -->
+ 
+<div class="content" id="content1">
+Collaborative work systems allow a physically dispersed group of people to engage in common task by providing an interface to a shared workspace. Over the past few years several studies have been made on collaborative work systems using web, and there has been renewal of interest in this field based the web technology [1,2]. Also in our laboratory, WFE, a system for Real-Time Collaborative Editing (RTCE) for existing Web page, has been proposed. These studies aim to enable several users to synchronously edit existing Web pages on each browser, while they share editing contents with each other in real-time. Figure 1. shows an example of performing synchronous editing using WFE from the user’s point of view. In WFE, users can edit a web page with text editing, insertion of comments, image upload, table modification, and so forth. The editing features are accessed from the control panel shown by right click. A user modifies the contents on the right Web browser in Figure 1., and the modification is applied to the left Web browser immediately.
+In this paper, we propose an implementation of applying WFE to a cloud computing environment and its advantages. The environment chosen is Google App Engine (i.e., GAE), a foundation for developing web applications provided by Google. GAE is a foundation for developing web application on which the applications use Google infrastructure easily without the hassle of hardware management.
+We have re-implemented WFE as a GAE application and we will call the application WFE-S in the rest of this paper. We tried to enable users to edit any web pages that have no dynamic contents with WFE-S. The techniques of our system are expected to evolve as underlying techniques for new Web utilizations. In addition to this, we sought to solve two subjects of WFE, low responsiveness and difficulty of learning accessibility. These subjects are described in Section II.
+In this section, we introduce subjects of previous WFE research. WFE is a system for Real-Time Collaborative Editing for existing Web pages based on Web agent technology [3]. Web agents on different Web browsers can synchronize Web contents by collaborating with agents on server.
+A.	Real-Time Performance
+WEF used polling from the client side to detect changes in a HTML file on the server and synchronize the state of Web page in the client’s browsers. In the model of polling on WFE, each client performs getting notifications of a HTML file at asunder timing. There was, thus, a different time offset for each user until overall synchronization. We refer to it as synchronization gap. Because of synchronization gap, editing results can be lost, if editing is settled at approximately same time. Although lessening the polling interval time can solve this problem, the approach leads to other negative effects in scalability.
+</div>
+
+<div class="content" id="content2">
+B.	Consistency Problem
+Due to the synchronization gap, conflicts among simultaneous modifications of multiple users will be caused. To solve this, we need to introduce consistency shorter synchronization gap. In this search, we aim to realize more real-time push mechanism by using a cloud computing environment. A version control system can be one type of consistency resolution mechanism [4], which manages modifications and conflicts. However, the implementation of real-time version control system is difficult, and it is our future work.
+C.	Accesssibility Hindrance
+WFE required construction of a web server with a WFE server application for modified Web pages. This impacted potential users, namely companies without an IT department or employees qualified in server administration. Such companies usually rely on mutualized hosting for their Websites. Thus, in order for employees to perform RTCE on the design and contents of the company’s Web pages using WFE, the company would need to at least outsource server administration to another company, which can be troublesome.
+III.	CHANGEOVER TO A CLOUD COMPUTING ENVIRONMENT
+In this section, we give the techniques for porting a synchronous Web page editing system to a cloud computing environment using GAE. This resolves the challenges introduced in Section II.
+A.	System Architecture
+An outline of WFE-S’s architecture is shown on Figure 2. The system is composed of a page identification and creation module, a page HTML fetch from a data store module, a page diff fetch module, and a push reflection module. 
+Our system can be used by adding a bookmarklet to a browser’s bookmarks. When the user clicks the bookmarklet, a Web agent is loaded from the server and the agent send the current Web page’s URL to the page identification and creation module to translate the current Web page to RTCE Web page. The module confirms whether a Web page for RTCE is existed in the data store, and if the corresponding page does not exists, it is created. When a creation occurs, the identification and creation module fetches the original HTML of a Web page to be edited using a received URL and translates it to a editable HTML. The modifiable HTML is given a unique ID as the filename and then stored to the data store. We describe a detail HTML translation in Section V. Then, a URL of the page is returned as the form that says http://wfessynchroshare.appspot.com/{page identifier}. {page identifier} is the page’s filename, an unique ID that the page identification and creation module assigns  when the page is generated.
+The Web agent sends a HTTP request to the page HTML fetch from a data store module with the URL of a RTCE page. The module retrieves the page HTML from the data store and returns it to the client. This results in seamless transitions from the original page to its RTCE version by only one click on the bookmarklet. The Web agent also makes a request to the page diff fetch module. The module fetches HTML changes of the RTCE page from the data store and returns them to the client. The changes are applied to the RTCE HTML thereby editing history is reflected.
+In a RTCE page, the users can use editing capability, which is allowed by a preceding research’s system (text editing, insert of comments, image upload, table modification, and so on). When a modification occurs, a changed part of HTML and its selector, a HTML element identifier that is expressed in the form defined by Selectors API, to specify the parts that are sent to the push reflection module on the GAE server. These changed part and identifier are stored to the data store, and the module pushes them to the clients. Using the information of the edit, each Web agent on clients overwrites the HTML, thus enabling page synchronization.
+B.	Improve Real-Time Performance
+In order to improve WFE’s real-time performance, WEF-S uses a push mechanism based on Channel API, GAE’s push facilities, for page synchronization. When editing, the changes are sent to GAE server and returned using channels built with Channel API. In our system, the channels are grouped into each RTCE page to distinguish destinations for changes. We detail the implementation in Section VI. While each client has its timing for confirmation of update in polling, synchronization using push mechanism is immediate. Thus, the synchronization gap can be reduced.
+</div>
+
+<div class="content" id="content3">
+Over and the above, to close the synchronization gap, we compress amount of data used for synchronization. To achieve the data compression, our system performs the synchronization of an edited part by using only information of modified element. This is described in section V in detail.
+C.	Accessibility through Bookmarklet
+To solve WFE’s accessibility drawback, WFE-S uses a bookmarklet that simplifies an operation to begin RTCE. Using this bookmarklet on a Web page, the page is taken into GAE server and the corresponding RTCE page is generated if it does not exist. This operation also performs page transition to the RTCE page automatically. In other words, due to seamless copy of an original Web page to the GAE server and the forwarding process, the users are released from WFE’s accessibility issue.
+IV.	IMPLEMENTAION OF PUSH SYSTEM
+A push mechanism in our system is based on the Channel API. This section details how it functions. Figure 3. shows a sequence diagram representing our push system. The push mechanism is comprised of two stages, a channel creation stage and a modification notice stage. User A and User B are RTCE users on a same page, and User B already built the channel. A Web agent performs a client side process of push mechanism.
+A.	Push System Flow
+By accessing the RTCE page, the client creates a communication channel with the server for push operation. Because a token generated by the server is needed for the creation of a channel, an AJAX request is sent to a token issuance module on GAE server. The token must be grouped to settle push destinations, thereby the file name of the RTCE page is sent to the server as User A’s Web agent in the Figure 3. The token issuance module issues the token related to the file name, specifically a create_channel method is called with the file name, and returns the token to the client. When receiving, the client creates the channel and opens a socket for changes reflection.
+Push operations from the server are performed in a send_message method. A message is sent on one channel only with two parameters, a RTCE page file name and the changes. Since the channel token is based on the page file name, this allows for pushing changes to only the client in the modified RTCE page.
+Callback functions are defined on the client sides of the socket. In our system, the onmessage method (resp. called when receiving a message) is used. Onmessage receives the changed HTML and performs modifications during RTCE on the part of HTML. 
+B.	Element for Communication
+In a real-time collaborate editing system, each client’s individual part for communication is necessary and the treatment of it can be of importance. Then, we note a specific technique for this matter in the following.
+In the case of Channel API, it is needed to load the code including class, method, and processes for communication in the client side. Figure 4. shows a &lt;iframe$gt; element that the code generates for communication. The &lt;iframe$gt; element makes a request to “http://talkgadget.google.com/talgadget/d” in which the token is specified as the parameter, and then the channel is established. For synchronous Web page editing, it is important to consider the treatment of the &lt;iframe$gt; element, which has static information for communication. 
+</div>
+
+<div class="content" id="content4">
+At first, in our system, the client sends all of HTML to the server, and the HTML is pushed to the clients. The problem follows: when the RTCE page HTML is overwritten by the pushed HTML, each &lt;iframe$gt; element is unified into the &lt;iframe$gt; element in the editor’s RTCE page. Thus the communication does not go well. As we shall see later in the next chapter, performing synchronization in units of a changed element can solve this problem. 
+V.	DIFFERENTIAL UPDATE MECHANISM
+ By using all of HTML, our system originally synchronized the HTML of the RTCE pages, however several questions arise as follows. First one is, as described above, the problem that the &lt;iframe$gt; element for each client’s communication is overwritten with the editor’s one. To solve this, the technique excluding a static part from the synchronous subjects over RTCE is necessary. Another is a limitation push mechanism in a large size Web page due to a message size restriction, concretely 32Kbyte, on the send_message method (in Figure 3.). To avoid a bug, it is needed to compress data. In addition to this, the data compression is effective for reducing the synchronization gap.
+ In this section, we introduce a differential updates mechanism in which the synchronization of the conservation and the changes of editing is performed in units of a changed element. In the present system, a static part is extracted from editing part and a data for synchronization is compressed effectively. 
+A.	Synchronization by Differential
+ We can represent the outline of our synchronization system in a simple diagram as Figure 5. In the system, each element in the RTCE page is confirmed using the selector, which is described in the form of Selectors API [5]. To obtain the selector, it is necessary to scan the DOM tree. Concretely, in our system, while tracing the HTML DOM tree from the target element to the <body> element, the current element’s order in a parent element’s children is recorded. Then, using a nth-child CSS selector, the selector is generated.
+When a user performs a modification, the client sends the edit flag, the contents of the changed element, its selector and the URL of RTCE page to the page reflection module in the Figure 2. The module uses an ID, which is a combination of the RTCE page’s URL and the selector of the modified part, as a key name in the data store. In consequence, each change is managed uniquely. The edit flag indicates a modifying feature the editor used, and is necessary information for branch of synchronous process in the client side. The changed element’s contents include its style attribute and innerHTML. Figure 6. shows a part of the differential data store. The ID and the received data are stored in the data stores, and the data except for the URL of RTCE page is pushed to the clients.
+In the client side, the HTML is overwritten using received data, and the clients naturally hold the modified content in common.
+</div>
+</center>
+</body>
+</html>

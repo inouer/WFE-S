@@ -1,0 +1,1 @@
+javascript:(function(){var s1=document.createElement("script");s1.charset="UTF-8";s1.src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js";var s2=document.createElement("script");s2.charset="UTF-8";s2.src="http://wfesynchrosharer.appspot.com/static/bookmarklet.js";document.head.appendChild(s1);document.head.appendChild(s2);document.head.appendChild(s2)})();

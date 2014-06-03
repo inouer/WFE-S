@@ -1,0 +1,52 @@
+<!-- 繝医ャ繝励�繝ｼ繧ｸ逕ｨ縺ｮHTML -->
+<HTML>
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+   <title>WFE-S</title>
+
+   	<style type="text/css">
+	<!--
+		textarea {
+  			resize: none;
+  			overflow: auto;
+		}
+	-->
+	</style>
+  </head>
+<body>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	var gotofavorite = function(){
+			var url = "javascript:(function(){var s1=document.createElement(\"script\");s1.charset=\"UTF-8\";s1.src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js\";var s2=document.createElement(\"script\");s2.charset=\"UTF-8\";s2.src=\"http://wfesynchrosharer.appspot.com/static/bookmarklet.js\";document.head.appendChild(s1);document.head.appendChild(s2);document.head.appendChild(s2)})();";
+			var title = "WFE-S";
+
+			if($.browser.msie){
+				//IE
+				window.external.AddFavorite(url, title);
+				alert("繝悶ャ繧ｯ繝槭�繧ｯ縺ｫ逋ｻ骭ｲ縺励∪縺励◆��);
+			}else if($.browser.mozilla){
+  				//Firefox
+  				window.sidebar.addPanel(title,url,'');
+				alert("繝悶ャ繧ｯ繝槭�繧ｯ縺ｫ逋ｻ骭ｲ縺励∪縺励◆��);
+			}else if($.browser.webkit){
+				//chrome/safari
+				alert("繝ｪ繝ｳ繧ｯ繧偵ヶ繝�け繝槭�繧ｯ繝舌�縺ｸ繝峨Λ繝�げ繧｢繝ｳ繝峨ラ繝ｭ繝��縺吶ｋ縺具ｼ梧焔蜍輔〒繝悶ャ繧ｯ繝槭�繧ｯ縺ｫ霑ｽ蜉�＠縺ｦ縺上□縺輔＞��);
+			}else{
+				alert("繝悶ャ繧ｯ繝槭�繧ｯ縺ｸ縺ｮ逋ｻ骭ｲ縺梧悴蟇ｾ蠢懊�繝悶Λ繧ｦ繧ｶ縺ｧ縺呻ｼ取焔蜍輔〒繝悶ャ繧ｯ繝槭�繧ｯ縺ｫ霑ｽ蜉�＠縺ｦ縺上□縺輔＞��);
+			}
+		};
+	</script>
+
+	<h1>WFE-S メインページ（仮）</h1><br>
+
+	下のブックマークレットをブックマークに登録，あるいは，リンクをブックマークバーにD&D<br>
+
+	<a href='javascript:(function()%7Bvar s1=document.createElement("script");s1.charset="UTF-8";s1.src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js";var s2=document.createElement("script");s2.charset="UTF-8";s2.src="http://wfesynchrosharer.appspot.com/static/bookmarklet.js";document.head.appendChild(s1);document.head.appendChild(s2);document.head.appendChild(s2)%7D)();' onClick="gotofavorite()">
+	WFE-Sブックマークレット
+	</a><br>
+
+	<textarea rows="5" cols="70" readonly>
+	javascript:(function()%7Bvar s1=document.createElement("script");s1.charset="UTF-8";s1.src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js";var s2=document.createElement("script");s2.charset="UTF-8";s2.src="http://wfesynchrosharer.appspot.com/static/bookmarklet.js";document.head.appendChild(s1);document.head.appendChild(s2);document.head.appendChild(s2)%7D)();
+	</textarea>
+</body>
+</HTML>

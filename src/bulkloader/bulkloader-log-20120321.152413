@@ -1,0 +1,81 @@
+[INFO     2012-03-21 15:24:13,773 bulkloader.py] Logging to bulkloader-log-20120321.152413
+[INFO     2012-03-21 15:24:13,774 bulkloader.py] Throttling transfers:
+[INFO     2012-03-21 15:24:13,774 bulkloader.py] Bandwidth: 250000 bytes/second
+[INFO     2012-03-21 15:24:13,774 bulkloader.py] HTTP connections: 8/second
+[INFO     2012-03-21 15:24:13,774 bulkloader.py] Entities inserted/fetched/modified: 20/second
+[INFO     2012-03-21 15:24:13,774 bulkloader.py] Batch Size: 10
+[INFO     2012-03-21 15:24:13,795 bulkloader.py] Opening database: bulkloader-progress-20120321.152413.sql3
+[INFO     2012-03-21 15:24:14,330 bulkloader.py] Opening database: bulkloader-results-20120321.152413.sql3
+[DEBUG    2012-03-21 15:24:14,750 adaptive_thread_pool.py] [Thread-1] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,750 adaptive_thread_pool.py] [Thread-2] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,751 adaptive_thread_pool.py] [Thread-3] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,751 adaptive_thread_pool.py] [Thread-4] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,751 adaptive_thread_pool.py] [Thread-5] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,752 adaptive_thread_pool.py] [Thread-7] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,752 adaptive_thread_pool.py] [Thread-6] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,752 adaptive_thread_pool.py] [Thread-8] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,753 adaptive_thread_pool.py] [Thread-9] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,753 adaptive_thread_pool.py] [Thread-10] WorkerThread: started
+[DEBUG    2012-03-21 15:24:14,753 bulkloader.py] Configuring remote_api. url_path = /_ah/remote_api, servername = wfesynchroshare.appspot.com
+[DEBUG    2012-03-21 15:24:14,755 bulkloader.py] Bulkloader using app_id: wfesynchroshare
+[INFO     2012-03-21 15:24:14,755 bulkloader.py] Connecting to wfesynchroshare.appspot.com/_ah/remote_api
+[DEBUG    2012-03-21 15:24:15,232 bulkloader.py] [Thread-11] ExportProgressThread: started
+[DEBUG    2012-03-21 15:24:15,232 bulkloader.py] [Thread-12] DataSourceThread: started
+[INFO     2012-03-21 15:24:15,232 bulkloader.py] Downloading kinds: ['__Stat_PropertyType_PropertyName_Kind__']
+[DEBUG    2012-03-21 15:24:15,312 bulkloader.py] [Thread-12] DataSourceThread: exiting
+[DEBUG    2012-03-21 15:24:15,315 adaptive_thread_pool.py] [Thread-1] Got work item __Stat_PropertyType_PropertyName_Kind__-ASC[None to None]
+[DEBUG    2012-03-21 15:24:15,347 bulkloader.py] Waiting for worker threads to finish...
+[ERROR    2012-03-21 15:24:15,912 adaptive_thread_pool.py] [Thread-1] WorkerThread:
+Traceback (most recent call last):
+  File "/usr/local/google_appengine/google/appengine/tools/adaptive_thread_pool.py", line 176, in WorkOnItems
+    status, instruction = item.PerformWork(self.__thread_pool)
+  File "/usr/local/google_appengine/google/appengine/tools/bulkloader.py", line 764, in PerformWork
+    transfer_time = self._TransferItem(thread_pool)
+  File "/usr/local/google_appengine/google/appengine/tools/bulkloader.py", line 1170, in _TransferItem
+    self, retry_parallel=self.first)
+  File "/usr/local/google_appengine/google/appengine/tools/bulkloader.py", line 1471, in GetEntities
+    results = self._QueryForPbs(query)
+  File "/usr/local/google_appengine/google/appengine/tools/bulkloader.py", line 1442, in _QueryForPbs
+    raise datastore._ToDatastoreError(e)
+BadRequestError: app s~wfesynchroshare cannot access app wfesynchroshare's data
+[DEBUG    2012-03-21 15:24:15,913 adaptive_thread_pool.py] [Thread-1] WorkerThread: exiting
+[INFO     2012-03-21 15:24:15,913 adaptive_thread_pool.py] [Thread-2] Backing off due to errors: 1.0 seconds
+[INFO     2012-03-21 15:24:16,347 bulkloader.py] An error occurred. Shutting down...
+[DEBUG    2012-03-21 15:24:16,348 adaptive_thread_pool.py] [Thread-4] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,348 adaptive_thread_pool.py] [Thread-3] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,348 adaptive_thread_pool.py] [Thread-8] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,348 adaptive_thread_pool.py] [Thread-7] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,349 adaptive_thread_pool.py] [Thread-6] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,349 adaptive_thread_pool.py] [Thread-5] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,349 adaptive_thread_pool.py] [Thread-9] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,350 adaptive_thread_pool.py] [Thread-10] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,350 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,350 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,416 adaptive_thread_pool.py] [Thread-2] WorkerThread: exiting
+[DEBUG    2012-03-21 15:24:16,417 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,417 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,417 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,417 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,417 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,417 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,417 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[DEBUG    2012-03-21 15:24:16,418 adaptive_thread_pool.py] Waiting for Anonymous_WorkerThread to exit
+[ERROR    2012-03-21 15:24:16,418 adaptive_thread_pool.py] Error in Thread-1: app s~wfesynchroshare cannot access app wfesynchroshare's data
+[DEBUG    2012-03-21 15:24:16,418 adaptive_thread_pool.py] Traceback (most recent call last):
+  File "/usr/local/google_appengine/google/appengine/tools/adaptive_thread_pool.py", line 176, in WorkOnItems
+    status, instruction = item.PerformWork(self.__thread_pool)
+  File "/usr/local/google_appengine/google/appengine/tools/bulkloader.py", line 764, in PerformWork
+    transfer_time = self._TransferItem(thread_pool)
+  File "/usr/local/google_appengine/google/appengine/tools/bulkloader.py", line 1170, in _TransferItem
+    self, retry_parallel=self.first)
+  File "/usr/local/google_appengine/google/appengine/tools/bulkloader.py", line 1471, in GetEntities
+    results = self._QueryForPbs(query)
+  File "/usr/local/google_appengine/google/appengine/tools/bulkloader.py", line 1442, in _QueryForPbs
+    raise datastore._ToDatastoreError(e)
+BadRequestError: app s~wfesynchroshare cannot access app wfesynchroshare's data
+
+[DEBUG    2012-03-21 15:24:16,418 bulkloader.py] Waiting for progress_thread to terminate...
+[DEBUG    2012-03-21 15:24:16,427 bulkloader.py] [Thread-11] ExportProgressThread: exiting
+[DEBUG    2012-03-21 15:24:16,434 bulkloader.py] ... done.
+[INFO     2012-03-21 15:24:16,435 bulkloader.py] Have 0 entities, 0 previously transferred
+[INFO     2012-03-21 15:24:16,435 bulkloader.py] 0 entities (1628 bytes) transferred in 2.7 seconds

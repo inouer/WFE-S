@@ -1,0 +1,71 @@
+root { 
+  display: block;
+}
+
+/*編集メニュー  wfe5a.js  openOption */
+div#writableoption{
+  
+  position:absolute;
+  width : 250px;
+  /*height: 250px;*/
+  background-color : #11AA00;
+  z-index:  20000;
+  padding: 2px;
+  
+}
+/*編集メニュー  aira_loaded.js   */
+div.aira_editmenu{
+  
+  position:absolute;
+  width : 280px;
+  /*height: 250px;*/
+  background-color : #11AA00;
+  z-index:  20000;
+  padding: 2px;
+  
+}
+
+button._aira{
+  margin: 2px;
+  padding:3px;
+  font-size: 14px;
+}
+button span.wfe_label{
+  font-size: 14px;
+}
+/*
+div#writableoption button span{
+  font-size: 15px;
+  
+}
+*/
+/** --------------  TABLE 編集-------------------- **/
+
+tr.aira_event_select{
+  background-color: #EE1111;
+}
+
+
+input#aira_tableL,input#aira_tableC{
+  background-color: #33DD22;
+  width:50px;
+}
+input#aira_list_num{
+  background-color: #33DD22;
+  width:50px;
+}
+
+
+/**伊奈専用*/
+
+.breadCrumb ul li span.writableDeco
+{
+  display:inline;
+  position:relative;
+}
+
+span.writableDeco,span._aira{
+  
+  display:inline;
+  position:relative;
+} 
