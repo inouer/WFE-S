@@ -548,7 +548,7 @@ function createEditField(replace) {
 				html + '</textarea><br>';//     '<input type="button" value="Save" onclick="submitTextField();"></form>';
 		}
 		return span;
-	}
+	};
 	var replaceAll =  false;
 	replaceEvalText(func, replaceAll, false, false);
 	//__
@@ -599,7 +599,7 @@ function insertLink(){
 			elem = null;
 		}
 		return elem;
-	}
+	};
 	//--------------------
 	if( document.getElementsByName('writableInsertAnchor') !=null ){
 	}else{
@@ -631,7 +631,7 @@ function insertLink(){
 
 //テキスト修飾用ウィンドウ
 function openDecoWindow(x,y){
-	var layoj0 = document.createElement('div')
+	var layoj0 = document.createElement('div');
 	layoj0.setAttribute('id','writableoption');
 	layoj0.setAttribute('name','writableoption');
 	//layoj0.style.position = "absolute";
@@ -687,7 +687,7 @@ function openDecoWindow(x,y){
 	 **/
 	//document.body.appendChild(layoj0);
 	var bodyEle = document.getElementsByTagName('body')[0];
-	bodyEle.appendChild(layoj0)
+	bodyEle.appendChild(layoj0);
 //	createButtonObject(value,scripts,parent)
 }
 
@@ -737,7 +737,7 @@ function insertDecoration(){
 		elem.appendChild(document.createTextNode(html));
 
 		return elem;
-	}
+	};
 
 	window.tmpDeco = {
 			'fontsize':'',
@@ -1102,7 +1102,8 @@ function openWFEMenu(flug){
 			return;
 		}
 		formlock=true;
-		if(flug=="wfe"){ //選択文字列を処理するとき
+		if(flug=="wfe"){ 
+		    //選択文字列を処理するとき
 			//			var re = new RegExp("\s", "mg");
 			//新しいSafariはgetSelectionの返値としてテキストオブジェクトを
 			//返さないようなので強制的に型変換
@@ -1233,7 +1234,7 @@ try {
 		}
 
 		return false;
-	}
+	};
 
 	document.onmousedown =
 		function(e){

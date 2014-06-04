@@ -12,22 +12,6 @@ var count = 0;
 var file_url = location.href;
 filename = file_url.substring(file_url.lastIndexOf("/")+1,file_url.length);
 
-window.onload = function(){
-	console.log("wfesinit");
-
-	socketSetting();
-
-	getDiff();
-
-	//データベース上のHTMLはエンコードされているので，デコードする
-	document.body.innerHTML=unescape(document.body.innerHTML);
-	document.title=unescape(document.title);
-
-	//デコードすると通信用iframe要素がおかしくなるので書きなおす
-	var body = document.body.innerHTML;
-	document.body.innerHTML=body.replace(/<iframe[^>]*><\/iframe>/,iframe);
-};
-
 // チャネル構築，ソケットのコールバック関数定義
 function socketSetting(){
 	//ファイル名からトークンを取得してソケットを開く
@@ -43,7 +27,7 @@ function socketSetting(){
 				//alert('channel opend');
 
 				//通信用iframe要素を保存する
-				iframe = $("body").html().match(/<iframe[^>]*><\/iframe>/)
+				iframe = $("body").html().match(/<iframe[^>]*><\/iframe>/);
 			};
 
 			socket.onmessage = function(message){
@@ -185,3 +169,19 @@ function insertSyncComment(html,style,id){
 function decodeHTML(){
 	
 }
+
+$(function(){
+    console.log("wfesinit");
+
+    socketSetting();
+
+    getDiff();
+
+    //データベース上のHTMLはエンコードされているので，デコードする
+    document.body.innerHTML=unescape(document.body.innerHTML);
+    document.title=unescape(document.title);
+
+    //デコードすると通信用iframe要素がおかしくなるので書きなおす
+    var body = document.body.innerHTML;
+    document.body.innerHTML=body.replace(/<iframe[^>]*><\/iframe>/,iframe);
+});

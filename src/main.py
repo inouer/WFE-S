@@ -113,6 +113,8 @@ class HTMLPage(webapp.RequestHandler):
             #リクエストされたファイルのインスタンスを取得する
             request_file = upload.HTMLEntity.get_by_key_name(request_file_name)
 
+            content = request_file.file_content.replace('&lt;','<').replace('&gt;','>')
+            
             #HTMLがデータベース上に存在しない場合の例外処理
             if request_file is None:
                 self.response.headers['Content-Type'] = "text/html"
@@ -121,7 +123,7 @@ class HTMLPage(webapp.RequestHandler):
                 #ファイルを送信する
                 self.response.headers['Content-Type'] = "text/html; charset=utf8"
                 self.response.headers['Access-Control-Allow-Origin'] = '*'
-                self.response.out.write(request_file.file_content)
+                self.response.out.write(content)
         #JSを送信する場合
         elif re.match('.*\.js', request_file_name):
             #リクエストされたファイルのインスタンスを取得する

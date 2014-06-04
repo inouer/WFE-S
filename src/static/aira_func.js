@@ -212,20 +212,21 @@ function loginWindow(position_left, position_top){
     float_div.setAttribute('id', id_login);
     float_div.setAttribute('class', 'aira_editmenu');
 
-    float_div.setAttribute('style','width:120px;'+'height:50px;'
+    float_div.setAttribute('style','width:auto;'+'height:auto;'
       +'padding:10px;'
-      +'background-color:#11AA00;'+'position:absolute;'
+      +'background-color:lightgray;'+'position:absolute;'
       +'z-index:900;'+'top:'+position_top+'px;'
+      +'font-size:16pt;'+'text-align:center;'
       +'left:'+position_left+'px;');
 
 
-    float_div.innerHTML ="Page Editor";
+    float_div.innerHTML ="Page Editor<br>";
 
     //ボタンをつける
 
     var button = document.createElement("BUTTON");
     button.type     = 'button';
-    button.setAttribute('style','padding:3px;font-size: 14px;');
+    button.setAttribute('style','background-color: seagreen;border: 0;color: white;padding: 5px 10px;font-family: sans-serif;font-size:15pt;border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px;cursor: pointer;');
     //button.innerHTML= '<span class="wfe_label" style="margin:3px;font-size: 15px;">LOGIN</span>';
     button.innerHTML= 'LOGIN';
     button.onclick  = loginAPI;

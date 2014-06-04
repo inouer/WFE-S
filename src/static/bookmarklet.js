@@ -21,7 +21,7 @@ var bookmarklet = function(){
 				}
 			}
 		});
-	}
+	};
 
 	//URLがデータストア上にあるときに呼ばれる関数
 	var Exist = function(page_id){
@@ -33,7 +33,7 @@ var bookmarklet = function(){
 	var notExist = function(url){
 		var password;
 		var lastIndex = location.href.lastIndexOf('/');
-		var host = location.href.substring(0,lastIndex);
+		var host = location.href.substring(0,lastIndex+1);
 
 		// 文字コード取得
 		var charset;
@@ -64,18 +64,29 @@ var bookmarklet = function(){
 			return;
 		}
 
-		//データストアに登録する
-		$.ajax({
-			url : wfespath+"/upload",
-			type: "GET",
-			data: {url : url , host : host , charset : charset , useragent : useragent , password : password},
-			success: function(page_id){
-				location.href = wfespath+page_id;
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown){
-				alert("WFE-Sブックマークレットはこのサイトでは使用できません．\n"+XMLHttpRequest+"\n"+textStatus+"\n"+errorThrown);
-			}
-		});
+        //ページ全体のHTMLを送信
+        $.ajax({
+            url : wfespath+"/upload",
+            type: "GET",
+            data: {url : url , host : host , charset : charset , useragent : useragent , password : password, html: $('html').get(0).outerHTML},
+            success: function(page_id){
+                location.href = wfespath+page_id;
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown){
+                //データストアに登録する
+                $.ajax({
+                    url : wfespath+"/upload",
+                    type: "GET",
+                    data: {url : url , host : host , charset : charset , useragent : useragent , password : password},
+                    success: function(page_id){
+                        location.href = wfespath+page_id;
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown){
+                        alert("WFE-Sブックマークレットはこのサイトでは使用できません．\n"+XMLHttpRequest+"\n"+textStatus+"\n"+errorThrown);
+                    }
+                });
+            }
+        });
 	};
 
 	//wfe-sのページ内では使えないようにする
